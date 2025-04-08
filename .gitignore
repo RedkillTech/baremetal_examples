@@ -1,0 +1,6 @@
+out/
+toolchain/
+.gdb_*
+tags
+.cache
+*.json
