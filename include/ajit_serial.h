@@ -1,0 +1,19 @@
+#define UART_OFFSET			0xFFFF3200
+
+#define UART_ADDR(x)		(UART_OFFSET + x)
+
+#define UART_CTL_ADDR		UART_ADDR(0x0)
+#define UART_TX_ADDR		UART_ADDR(0x4)
+#define UART_RX_ADDR		UART_ADDR(0x8)
+#define UART_BAUD_LIMIT_ADDR	UART_ADDR(0xc)
+#define UART_BAUD_FREQ_ADDR	UART_ADDR(0x10)
+
+#define UART_TX_ENABLE		(1 << 0)
+#define UART_RX_ENABLE		(1 << 1)
+#define UART_RX_INTR		(1 << 2)
+#define UART_TX_FULL		(1 << 3)
+#define UART_RX_FULL		(1 << 4)
+
+#define AJIT_UART_IRQ		12
+#define AJIT_UART_BAUD_RATE	115200
+#define AJIT_UART_CLK_FREQ	80000000

@@ -15,7 +15,7 @@ INCLUDE += -Iplat/$(PLAT)/
 
 OUTPUT := out
 
-CFLAGS := -nostdlib -nostdinc -ffreestanding -nostartfiles -fno-builtin $(INCLUDE) -march=$(CPU)
+CFLAGS := -nostdlib -nostdinc -ffreestanding -nostartfiles -fno-builtin $(INCLUDE) $(ARCH_CFLAGS)
 CFLAGS += -Wall -Werror
 CFLAGS += -DBUILD_ID='"$(BUILD_ID)"' -DNCPU=$(NCPU)
 
@@ -25,7 +25,15 @@ else
 	CFLAGS += -O3
 endif
 
-CROSS_COMPILE := ./toolchain/arm-gnu-toolchain-14.2.rel1-x86_64-aarch64-none-elf/bin/aarch64-none-elf
+CROSS_COMPILE ?= ./toolchain/arm-gnu-toolchain-14.2.rel1-x86_64-aarch64-none-elf/bin/aarch64-none-elf
+
+CONFIG_AJIT ?= 0
+
+ifeq ($(ARCH), sparc)
+	CONFIG_AJIT = 1
+endif
+
+export CONFIG_AJIT
 
 CC := $(CROSS_COMPILE)-gcc
 OC := $(CROSS_COMPILE)-objcopy
