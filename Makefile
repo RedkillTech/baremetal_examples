@@ -1,3 +1,4 @@
+
 BUILD_ID :=\"$(shell git log -1 --abbrev-commit --pretty=oneline)\"
 
 ARCH  ?= arm64
@@ -7,13 +8,15 @@ DEBUG ?= 1
 
 ARCH_ASM_OBJS :=
 ARCH_OBJS :=
+KERNEL_ROOT := $(PWD)
+
 include arch/$(ARCH)/arch.mk
 
 INCLUDE := -Iinclude/ -Ilib/include
 INCLUDE += -Iarch/$(ARCH)/include -Iarch/$(ARCH)
 INCLUDE += -Iplat/$(PLAT)/
 
-OUTPUT := out
+OUTPUT := out-$(ARCH)
 
 CFLAGS := -nostdlib -nostdinc -ffreestanding -nostartfiles -fno-builtin $(INCLUDE) $(ARCH_CFLAGS)
 CFLAGS += -Wall -Werror
@@ -24,8 +27,6 @@ ifeq ($(DEBUG), 1)
 else
 	CFLAGS += -O3
 endif
-
-CROSS_COMPILE ?= ./toolchain/arm-gnu-toolchain-14.2.rel1-x86_64-aarch64-none-elf/bin/aarch64-none-elf
 
 CONFIG_AJIT ?= 0
 

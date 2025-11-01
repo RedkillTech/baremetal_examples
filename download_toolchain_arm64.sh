@@ -14,7 +14,7 @@ NC='\033[0m' # No Color
 
 # Create directories in current working directory
 CURRENT_DIR="$(pwd)"
-TOOLCHAIN_DIR="$CURRENT_DIR/toolchain"
+TOOLCHAIN_DIR="$CURRENT_DIR/toolchain/arm64"
 DOWNLOAD_DIR="/tmp"
 
 mkdir -p "$TOOLCHAIN_DIR"
